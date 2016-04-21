@@ -83,7 +83,7 @@ module EventMachine
 
         # There is no code defined for application errors, so use 3000
         # (which is reserved for frameworks)
-        if (e..message != 'Invalid UTF8 data')
+        if (e.message != 'Invalid UTF8 data')
           close_websocket_private(3000, "Application error")
         end
 
