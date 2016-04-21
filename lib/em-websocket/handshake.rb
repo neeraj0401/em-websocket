@@ -89,16 +89,16 @@ module EventMachine
           @path = uri.path
           @query_string = uri.query || ""
         rescue URI::InvalidURIError
-          raise HandshakeError, "Invalid request URI: #{@parser.request_url}"
+          raise HandshakeError, "Handshake error (Invalid request URI: #{@parser.request_url})"
         end
 
         # Validate Upgrade
         unless @parser.upgrade?
-          raise HandshakeError, "Not an upgrade request"
+          raise HandshakeError, "Handshake error (Not an upgrade request)"
         end
         upgrade = @headers['upgrade']
         unless upgrade.kind_of?(String) && upgrade.downcase == 'websocket'
-          raise HandshakeError, "Invalid upgrade header: #{upgrade.inspect}"
+          raise HandshakeError, "Handshake error (Invalid upgrade header: #{upgrade.inspect})"
         end
 
         # Determine version heuristically
